@@ -16,7 +16,7 @@ from ckan import model
 
 from ckan.plugins import implements, SingletonPlugin
 import ckan.plugins as p
-import ckanext.authz.logic.action as a
+import ckanext.authz.logic.action.create as a
 
 
 log = getLogger(__name__)
