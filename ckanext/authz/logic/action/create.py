@@ -58,8 +58,9 @@ def editor_role_create(context,data_dict):
                    'msg' : traceback.print_exc()}
     else:
         return{'success' : False,
-                   'msg' : 'authentication failed'}
+                   'msg' : 'authentication failed'}      
         
+
 
 def reader_role_create(context,data_dict):
     '''

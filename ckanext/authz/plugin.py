@@ -35,7 +35,7 @@ class Authz(SingletonPlugin):
     
     def _get_functions(self,module_root, logic_functions = {}):
     
-        for module_name in ['get', 'create']:
+        for module_name in ['get', 'create', 'delete']:
             
             module_path = '%s.%s' % (module_root, module_name,)
             try:

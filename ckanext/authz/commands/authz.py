@@ -24,6 +24,20 @@ class Authentication(CkanCommand):
       authz add-anon_editor {name}
         - Gives editor rights to anonymous (i.e. not logged in) users. This means the user can edit and read any object
     
+      
+      authz rm-admin {name}
+        - Removes admin rights from the given user.
+        
+      authz rm-editor {name}
+        - Removes editor rights from the given user. This means the user can edit, read and create new objects.
+        
+      authz rm-reader {name}
+        - Removes reader rights from the given user. This means the user can perform any action on any object.
+        
+      authz rm-anon_editor {name}
+        - Removes editor rights from anonymous (i.e. not logged in) users. This means the user can edit and read any object
+    
+    
       authz roles
         - Displays any current roles.
 
@@ -68,7 +82,15 @@ class Authentication(CkanCommand):
         elif cmd == 'add-reader':
             self.add_reader()
         elif cmd == 'add-anon_editor':
-            self.add_anon_editor
+            self.add_anon_editor          
+        elif cmd == "rm-admin":
+            self.remove_admin()
+        elif cmd == 'rm-editor':
+            self.remove_editor()
+        elif cmd == 'rm-reader':
+            self.remove_reader()
+        elif cmd == 'rm-anon_editor':
+            self.remove_anon_editor
         else:
             print 'Command %s not recognized' % cmd
 
@@ -159,6 +181,69 @@ class Authentication(CkanCommand):
 
         if result['success'] == True:
             print 'role anon_editor is successfully created for user %s' % user_name
+        else:
+            print 'An error occurred: %s' % result['msg']
+
+
+    def remove_admin(self):
+        if len(self.args) >= 2:
+            user_name = unicode(self.args[1])
+        else:
+            print 'Please provide a name'
+            sys.exit(1)
+
+        context = {'model': model,'session':model.Session, 'user': self.admin_user['name']}
+        result = get_action('admin_role_delete')(context,{'user_name':user_name})
+
+        if result['success'] == True:
+            print 'role admin is successfully deleted for user %s' % user_name
+        else:
+            print 'An error occurred: %s' % result['msg']
+    
+    def remove_editor(self):
+        if len(self.args) >= 2:
+            user_name = unicode(self.args[1])
+        else:
+            print 'Please provide a name'
+            sys.exit(1)
+
+        context = {'model': model,'session':model.Session, 'user': self.admin_user['name']}
+        result = get_action('editor_role_delete')(context,{'user_name':user_name})
+
+        if result['success'] == True:
+            print 'role editor is successfully deleted for user %s' % user_name
+        else:
+            print 'An error occurred: %s' % result['msg']
+
+     
+    def remove_reader(self):
+        if len(self.args) >= 2:
+            user_name = unicode(self.args[1])
+        else:
+            print 'Please provide a name'
+            sys.exit(1)
+
+        context = {'model': model,'session':model.Session, 'user': self.admin_user['name']}
+        result = get_action('reader_role_delete')(context,{'user_name':user_name})
+
+        if result['success'] == True:
+            print 'role reader is successfully deleted for user %s' % user_name
+        else:
+            print 'An error occurred: %s' % result['msg']
+            
+            
+    def remove_anony_editor(self):
+        if len(self.args) >= 2:
+            user_name = unicode(self.args[1])
+        else:
+            print 'Please provide a name'
+            sys.exit(1)
+
+        context = {'model': model,'session':model.Session, 'user': self.admin_user['name']}
+        result = get_action('anon_editor_role_delete')(context,{'user_name':user_name})
+
+        if result['success'] == True:
+            print 'role anon_editor is successfully deleted for user %s' % user_name
         else:
             print 'An error occurred: %s' % result['msg']
 
