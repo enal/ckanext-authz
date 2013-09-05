@@ -30,6 +30,7 @@ class Authz(SingletonPlugin):
 
         module_root = 'ckanext.authz.logic.action'
         action_functions = self._get_logic_functions(module_root)
+        log.debug('These are the actions that were exported: %s', action_functions)
 
         return action_functions
     
