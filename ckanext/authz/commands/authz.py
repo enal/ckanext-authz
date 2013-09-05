@@ -113,9 +113,9 @@ class Authentication(CkanCommand):
 
 
     def print_roles(self,roles):
-            print 'System: %s' % roles.get('System') + '\n'
-            print 'Group: %s' % roles.get('Group') + '\n'
-            print 'Package: %s' % roles.get('Package') + '\n'
+            print 'System: %s' % roles['System'] + '\n'
+            print 'Group: %s' % roles['Group'] + '\n'
+            print 'Package: %s' % roles['Package'] + '\n'
 
 
     def add_admin(self):
