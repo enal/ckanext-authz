@@ -30,7 +30,7 @@ def editor_role_create(context, data_dict):
     '''
     Authorization check for changing the details of a role
     '''
-    return {'success': False}
+    {'success': False, 'msg': pt._('Only sysadmins can create harvest jobs for all sources')}
     
     model = context.get('model')
     user = context.get('user')
