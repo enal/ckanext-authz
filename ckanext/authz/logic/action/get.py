@@ -35,11 +35,11 @@ def roles_user_list(context,data_dict):
                      'Package': []}         
                 
             for role in [u'admin',u'editor', u'reader']:      
-                if(authz.user_has_role(user_name, role, model.System())):
+                if(authz.user_has_role(user, role, model.System())):
                     roles['System'].append(role)
-                if(authz.user_has_role(user_name, role, model.Package())): 
+                if(authz.user_has_role(user, role, model.Package())): 
                     roles['Package'].append(role)
-                if(authz.user_has_role(user_name, role, model.Group())): 
+                if(authz.user_has_role(user, role, model.Group())): 
                     roles['Group'].append(role)
                 
             
@@ -65,7 +65,7 @@ def roles_all_list(context,data_dict):
     :returns: roles
     :rtype: dictionary
     '''      
-    if( check_access('roles_user_list',context,data_dict) == True):
+    if( check_access('roles_all_list',context,data_dict) == True):
     
         user_name = data_dict.get('user_name')
         log.info('Looking up roles for user %r ...', user_name)
@@ -81,13 +81,13 @@ def roles_all_list(context,data_dict):
                 roles = {'System' : [],
                          'Group': [],
                          'Package': []} 
-                
+                user = model.User.get(user.name)
                 for role in [u'admin',u'editor', u'reader']:      
-                    if(authz.user_has_role(user.name, role, model.System())):
+                    if(authz.user_has_role(user, role, model.System())):
                         roles['System'].append(role)
-                    if(authz.user_has_role(user.name, role, model.Package())): 
+                    if(authz.user_has_role(user, role, model.Package())): 
                         roles['Package'].append(role)
-                    if(authz.user_has_role(user.name, role, model.Group())): 
+                    if(authz.user_has_role(user, role, model.Group())): 
                         roles['Group'].append(role)
                                                 
                 user_roles['roles'] = roles
