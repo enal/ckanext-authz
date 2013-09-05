@@ -108,9 +108,6 @@ class Authentication(CkanCommand):
         
         if(source['success'] == True):
             
-            for role in (source['result']).all():
-                print role
-            
             print str(source['result'])
         #self.print_harvest_source(source)
         else:

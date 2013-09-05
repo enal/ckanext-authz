@@ -30,13 +30,35 @@ def roles_list(context,data_dict):
         try:
             user = model.User.get(user_name)
             
-            objectrole = authz.UserObjectRole.get_object_role_class(model.System())
-            admin_s = objectrole._user_query(user, u'admin', model.System())
+            roles = {'System' : [],
+                     'Group': [],
+                     'Package': []}
             
-            if admin_s.count() == 1:
-                result = 'admin systemweit'
-            else:
-                result = 'weiß nicht'
+            if(authz.user_has_role(user, u'admin', model.System())):
+                roles['System'].append('admin')
+            if(authz.user_has_role(user, u'admin', model.Package())): 
+                roles['Group'].append('admin')
+            if(authz.user_has_role(user, u'admin', model.Group())): 
+                roles['Package'].append('admin')
+                
+                
+            if(authz.user_has_role(user, u'editor', model.System())):
+                roles['System'].append('editor')
+            if(authz.user_has_role(user, u'editor', model.Package())): 
+                roles['Package'].append('editor')
+            if(authz.user_has_role(user, u'editor', model.Group())): 
+                roles['Group'].append('editor')
+                           
+                
+            if(authz.user_has_role(user, u'reader', model.System())):
+                roles['System'].append('reader')
+            if(authz.user_has_role(user, u'reader', model.Package())): 
+                roles['Package'].append('reader')
+            if(authz.user_has_role(user, u'reader', model.Group())): 
+                roles['Group'].append('reader')
+                
+            
+            result = roles
             
             #admin_s = authz._user_query(user, u'admin', model.System())
             #admin_p = authz._user_query(user, u'admin', model.Package())
