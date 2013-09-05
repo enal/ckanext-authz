@@ -26,7 +26,7 @@ def roles_list(context,data_dict):
     if( check_access('roles_list',context,data_dict) == True):
     
         user_name = data_dict.get('user_name')
-        log.info('Creating admin role for user: %r', user_name)
+        log.info('Looking up roles for user %r ...', user_name)
         try:
             user = model.User.get(user_name)
             

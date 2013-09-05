@@ -107,16 +107,14 @@ class Authentication(CkanCommand):
         source = get_action('roles_list')(context,{'user_name':'pluginuser'})
         
         if(source['success'] == True):
-            
-            print str(source['result'])
-        #self.print_harvest_source(source)
+            self.print_harvest_source(source)
         else:
             print 'An error occurred: ' + str(source['msg'])
 
     def print_roles(self,roles):
-        for role in roles:
-            print 'User name: %s' % role.get('name')
-            print 'role: %s' % role.get('role')
+            print 'System: %s' % roles.get('System') + '\n'
+            print 'Group: %s' % roles.get('Group') + '\n'
+            print 'Package: %s' % roles.get('Package') + '\n'
 
 
     def add_admin(self):
