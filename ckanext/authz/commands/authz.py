@@ -123,12 +123,17 @@ class Authentication(CkanCommand):
             sys.exit(1)
 
         context = {'model': model,'session':model.Session, 'user': self.admin_user['name']}
-        success = get_action('editor_role_create')(context,{'user_name':user_name})
+        result = get_action('editor_role_create')(context,{'user_name':user_name})
+        
+        '''fobj_out = open('/home/administrator/pyenv/out.txt', 'wb')
+        fobj_out.write('These are the actions that were exported: ' +  str(action_functions))
+        fobj_out.close()
+        log.debug('These are the actions that were exported: %s', action_functions)'''
 
-        if success == True:
+        if result['success'] == True:
             print 'role editor is successfully created for user %s' % user_name
         else:
-            print 'An error occurred: %s' % success
+            print 'An error occurred: %s' % result['error']
             
           
             

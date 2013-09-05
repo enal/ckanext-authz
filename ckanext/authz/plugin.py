@@ -23,14 +23,8 @@ class Authz(SingletonPlugin):
 
     def get_actions(self):
 
-        #return {'editor_role_create': editor_role_create}
         module_root = 'ckanext.authz.logic.action'
         action_functions = self._get_logic_functions(module_root)
-        
-        fobj_out = open('/home/administrator/pyenv/out.txt', 'wb')
-        fobj_out.write('These are the actions that were exported: ' +  str(action_functions))
-        fobj_out.close()
-        log.debug('These are the actions that were exported: %s', action_functions)
 
         return action_functions
     
@@ -38,7 +32,6 @@ class Authz(SingletonPlugin):
     def _get_logic_functions(self,module_root, logic_functions = {}):
     
         for module_name in ['get', 'create']:
-
             
             module_path = '%s.%s' % (module_root, module_name,)
             try:
@@ -54,10 +47,5 @@ class Authz(SingletonPlugin):
                 if not key.startswith('_') and (hasattr(value, '__call__')
                             and (value.__module__ == module_path)):
                     logic_functions[key] = value
-                    
-            fobj_out = open('/home/administrator/pyenv/out.txt', 'wb')
-            fobj_out.write('module_path: ' + str(module_path))
-            fobj_out.write('module_path: ' + str(module_path))
-            fobj_out.close()
     
         return logic_functions
