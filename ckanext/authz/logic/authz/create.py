@@ -31,7 +31,7 @@ def editor_role_create(context, data_dict):
     '''
     Authorization check for changing the details of a role
     '''
-    return {'success': True}
+    return {'success': False}
     
     model = context.get('model')
     user = context.get('user')

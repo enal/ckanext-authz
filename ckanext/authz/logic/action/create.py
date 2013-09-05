@@ -17,7 +17,6 @@ def admin_role_create(context,data_dict):
     :returns: on success True otherwise False
     :rtype: string
     '''
-    return{'success' : False}
     
     user_name = data_dict.get('user_name')
     log.info('Creating admin role for user: %r', user_name)
@@ -41,7 +40,7 @@ def editor_role_create(context,data_dict):
     :returns: on success True otherwise False
     :rtype: string
     '''
-    return{'success' : False}
+
     user_name = data_dict.get('user_name')
     log.info('Creating editor role for user: %r', user_name)
     try:
@@ -63,7 +62,6 @@ def reader_role_create(context,data_dict):
     :returns: on success True otherwise False
     :rtype: string
     '''
-    return{'success' : False}
     user_name = data_dict.get('user_name')
     log.info('Creating reader role for user: %r', user_name)
     try:
@@ -85,7 +83,6 @@ def anon_editor_role_create(context,data_dict):
     :returns: on success True otherwise False
     :rtype: string
     '''
-    return{'success' : False}
     
     user_name = data_dict.get('user_name')
     log.info('Creating reader role for user: %r', user_name)
