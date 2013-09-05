@@ -110,7 +110,7 @@ class Authentication(CkanCommand):
             print str(source)
         #self.print_harvest_source(source)
         else:
-            print 'An error occurred: ' + source['msg']
+            print 'An error occurred: ' + str(source['msg'])
 
     def print_roles(self,roles):
         for role in roles:
