@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import logging
 from sqlalchemy import or_
 from ckan.model import User

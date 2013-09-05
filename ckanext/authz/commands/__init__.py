@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 try:
     import pkg_resources
     pkg_resources.declare_namespace(__name__)
