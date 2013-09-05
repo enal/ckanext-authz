@@ -106,12 +106,9 @@ class Authentication(CkanCommand):
                 'user': self.admin_user['name'],
                 'ignore_auth': True,
             }
-            source = get_action('roles_list')(context,{})
-            print 'Created new harvest source:'
-            self.print_harvest_source(source)
-
-            roles = get_action('harvest_source_list')(context,{})
-            self.print_roles(roles)
+            source = get_action('roles_list')(context,{'user_name':'pluginuser'})
+            print str(source)
+            #self.print_harvest_source(source)
             
         except:
             print 'An error occurred'
