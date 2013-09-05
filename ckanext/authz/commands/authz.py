@@ -128,7 +128,7 @@ class Authentication(CkanCommand):
         if success == True:
             print 'role editor is successfully created for user %s' % user_name
         else:
-            print 'An error occurred'
+            print 'An error occurred: %s' % success
             
           
             
