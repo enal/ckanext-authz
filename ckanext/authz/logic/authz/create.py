@@ -26,33 +26,7 @@ def admin_role_create(context, data_dict):
                 .format(user, 'admin role')}
         
 
-def editor_role_create(context, data_dict):
-    '''
-    Authorization check for changing the details of a role
-    '''
-    
-    
-    fobj_out = open('/home/administrator/pyenv/out.txt',"w")
 
-    fobj_out.write('here')
-    fobj_out.close()
-    
-    return {'success': False, 'msg': pt._('Only sysadmins can create harvest jobs for all sources')}
-        
-    '''model = context.get('model')
-    user = context.get('user')
-    
-    data_dict['user'] = user
-    data_dict['domain_object'] = model.System()
-    data_dict['roles'] = ['editor']
-
-    try:
-        pt.check_access('user_role_update', context, data_dict)
-        return {'success': True}
-    except pt.NotAuthorized:
-        return {'success': False,
-                'msg': pt._('User {0} not authorized to read harvest source {1}')
-                .format(user, 'editor role')}'''
         
 
         
