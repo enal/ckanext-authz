@@ -30,8 +30,15 @@ def editor_role_create(context, data_dict):
     '''
     Authorization check for changing the details of a role
     '''
-    return {'success': False, 'msg': pt._('Only sysadmins can create harvest jobs for all sources')}
     
+    
+    fobj_out = open('/home/administrator/pyenv/out.txt',"w")
+
+    fobj_out.write('here')
+    fobj_out.close()
+    
+    return {'success': False, 'msg': pt._('Only sysadmins can create harvest jobs for all sources')}
+        
     '''model = context.get('model')
     user = context.get('user')
     
