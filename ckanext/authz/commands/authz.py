@@ -117,7 +117,7 @@ class Authentication(CkanCommand):
             print 'An error occurred: ' + str(source['msg'])
 
 
-    def list__all_roles(self):
+    def list_all_roles(self):
         print 'to be implemented'
 
     def print_roles(self,roles):
