@@ -4,7 +4,7 @@ import logging
 from ckan import logic
 import ckan.model as model
 import ckan.model.authz as authz
-
+import traceback
 
 log = logging.getLogger(__name__)
 
@@ -47,8 +47,8 @@ def editor_role_create(context,data_dict):
         model.Session.commit()
         return {'success': True}
     except:
+        traceback.print_exc()
         return{'success' : False}
-        
     return None
 
 def reader_role_create(context,data_dict):
