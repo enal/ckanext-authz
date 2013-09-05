@@ -76,12 +76,12 @@ def roles_all_list(context,data_dict):
             
             users = model.User.all()          
             for user in users:
-                user_roles = {'name' : str(user.name)}
+                user_roles = {'name' : user.name}
                 
                 roles = {'System' : [],
                          'Group': [],
                          'Package': []} 
-                user = model.User.get(user.name)
+                #user = model.User.get(user)
                 for role in [u'admin',u'editor', u'reader']:      
                     if(authz.user_has_role(user, role, model.System())):
                         roles['System'].append(role)
