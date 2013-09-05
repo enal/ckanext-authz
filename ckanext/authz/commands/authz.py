@@ -108,12 +108,12 @@ class Authentication(CkanCommand):
             sys.exit(1)
 
         context = {'model': model,'session':model.Session, 'user': self.admin_user['name']}
-        success = get_action('admin_role_create')(context,{'user_name':user_name})
+        result = get_action('admin_role_create')(context,{'user_name':user_name})
 
-        if success == True:
+        if result['success'] == True:
             print 'role admin is successfully created for user %s' % user_name
         else:
-            'An error occurred'
+            print 'An error occurred: %s' % result['error']
     
     def add_editor(self):
         if len(self.args) >= 2:
@@ -124,19 +124,13 @@ class Authentication(CkanCommand):
 
         context = {'model': model,'session':model.Session, 'user': self.admin_user['name']}
         result = get_action('editor_role_create')(context,{'user_name':user_name})
-        
-        '''fobj_out = open('/home/administrator/pyenv/out.txt', 'wb')
-        fobj_out.write('These are the actions that were exported: ' +  str(action_functions))
-        fobj_out.close()
-        log.debug('These are the actions that were exported: %s', action_functions)'''
 
         if result['success'] == True:
             print 'role editor is successfully created for user %s' % user_name
         else:
             print 'An error occurred: %s' % result['error']
-            
-          
-            
+
+     
     def add_reader(self):
         if len(self.args) >= 2:
             user_name = unicode(self.args[1])
@@ -145,12 +139,12 @@ class Authentication(CkanCommand):
             sys.exit(1)
 
         context = {'model': model,'session':model.Session, 'user': self.admin_user['name']}
-        success = get_action('reader_role_create')(context,{'user_name':user_name})
+        result = get_action('reader_role_create')(context,{'user_name':user_name})
 
-        if success == True:
+        if result['success'] == True:
             print 'role reader is successfully created for user %s' % user_name
         else:
-            print 'An error occurred'
+            print 'An error occurred: %s' % result['error']
             
             
     def add_anony_editor(self):
@@ -161,12 +155,12 @@ class Authentication(CkanCommand):
             sys.exit(1)
 
         context = {'model': model,'session':model.Session, 'user': self.admin_user['name']}
-        success = get_action('anon_editor_role_create')(context,{'user_name':user_name})
+        result = get_action('anon_editor_role_create')(context,{'user_name':user_name})
 
-        if success == True:
+        if result['success'] == True:
             print 'role anon_editor is successfully created for user %s' % user_name
         else:
-            print 'An error occurred'
+            print 'An error occurred: %s' % result['error']
 
 
     

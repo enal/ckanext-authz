@@ -2,15 +2,8 @@
 import os
 import re
 from logging import getLogger
-from pylons import config
-from pylons.i18n import _
-from genshi.input import HTML
-from genshi.filters import Transformer
-
 from ckan.plugins import implements, SingletonPlugin
 import ckan.plugins as p
-import ckanext.authz.logic.action.create as create
-import ckanext.authz.logic.action.create as get
 
 
 log = getLogger(__name__)
@@ -19,17 +12,28 @@ log = getLogger(__name__)
 class Authz(SingletonPlugin):
 
     p.implements(p.IActions)
+    p.implements(p.IAuthFunctions)
 
 
+    # for IActions
     def get_actions(self):
 
         module_root = 'ckanext.authz.logic.action'
-        action_functions = self._get_logic_functions(module_root)
+        action_functions = self._get_functions(module_root)
 
         return action_functions
     
     
-    def _get_logic_functions(self,module_root, logic_functions = {}):
+    # for IAuthFunctions
+    def get_auth_functions(self):
+
+        module_root = 'ckanext.authz.logic.authz'
+        auth_functions = self._get_functions(module_root)
+
+        return auth_functions
+    
+    
+    def _get_functions(self,module_root, logic_functions = {}):
     
         for module_name in ['get', 'create']:
             
