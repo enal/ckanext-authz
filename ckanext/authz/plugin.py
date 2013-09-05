@@ -16,6 +16,7 @@ from ckan import model
 
 from ckan.plugins import implements, SingletonPlugin
 import ckan.plugins as p
+import ckanext.authz.logic.action as a
 
 
 log = getLogger(__name__)
@@ -28,8 +29,10 @@ class Authz(SingletonPlugin):
 
     def get_actions(self):
 
+        return {'editor_role_create': a.editor_role_create}
         module_root = 'ckanext.authz.logic.action'
         action_functions = self._get_logic_functions(module_root)
+        
         fobj_out = open('/home/administrator/pyenv/out.txt', 'wb')
         fobj_out.write('These are the actions that were exported: ' +  str(action_functions))
         fobj_out.close()
@@ -41,6 +44,8 @@ class Authz(SingletonPlugin):
     def _get_logic_functions(self,module_root, logic_functions = {}):
     
         for module_name in ['get', 'create']:
+
+            
             module_path = '%s.%s' % (module_root, module_name,)
             try:
                 module = __import__(module_path)
@@ -55,5 +60,10 @@ class Authz(SingletonPlugin):
                 if not key.startswith('_') and (hasattr(value, '__call__')
                             and (value.__module__ == module_path)):
                     logic_functions[key] = value
+                    
+            fobj_out = open('/home/administrator/pyenv/out.txt', 'wb')
+            fobj_out.write('module_path: ' + str(module_path))
+            fobj_out.write('module_path: ' + str(module_path))
+            fobj_out.close()
     
         return logic_functions
