@@ -9,7 +9,8 @@ from genshi.filters import Transformer
 
 from ckan.plugins import implements, SingletonPlugin
 import ckan.plugins as p
-from ckanext.authz.logic.action.create import editor_role_create
+import ckanext.authz.logic.action.create as create
+import ckanext.authz.logic.action.create as get
 
 
 log = getLogger(__name__)
@@ -22,7 +23,7 @@ class Authz(SingletonPlugin):
 
     def get_actions(self):
 
-        return {'editor_role_create': editor_role_create}
+        #return {'editor_role_create': editor_role_create}
         module_root = 'ckanext.authz.logic.action'
         action_functions = self._get_logic_functions(module_root)
         
