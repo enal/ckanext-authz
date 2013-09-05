@@ -41,19 +41,21 @@ def editor_role_create(context,data_dict):
     :returns: on success True otherwise False
     :rtype: string
     '''
-    check_access('editor_role_create',context,data_dict)
+    if(check_access('editor_role_create',context,data_dict) == True):
     
-    user_name = data_dict.get('user_name')
-    log.info('Creating editor role for user: %r', user_name)
-    try:
-        user = model.User.get(user_name)
-        authz.add_user_to_role(user,u'editor',model.System())
-        model.Session.commit()
-        return {'success': True}
-    except:
-        return{'success' : False,
-               'error' : traceback.print_exc()}
-    return None
+        user_name = data_dict.get('user_name')
+        log.info('Creating editor role for user: %r', user_name)
+        try:
+            user = model.User.get(user_name)
+            authz.add_user_to_role(user,u'editor',model.System())
+            model.Session.commit()
+            return {'success': True}
+        except:
+            return{'success' : False,
+                   'error' : traceback.print_exc()}
+        return None
+    else:
+        print 'not authorized'
 
 def reader_role_create(context,data_dict):
     '''
