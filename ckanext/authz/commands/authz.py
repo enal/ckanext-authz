@@ -137,7 +137,7 @@ class Authentication(CkanCommand):
             for user_role in user_roles:
                 print 'User: %s' % user_role['name']
                 self.print_roles(user_role['roles'])
-            print '\n'
+                print '\n'
         else:
             print 'An error occurred: ' + str(source['msg'])
         

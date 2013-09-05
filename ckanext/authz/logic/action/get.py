@@ -53,10 +53,7 @@ def roles_user_list(context,data_dict):
         return{'success' : False,
                    'msg' : 'authentication failed'}
         
-
-
-
-        
+     
         
 def roles_all_list(context,data_dict):
     '''
@@ -78,7 +75,7 @@ def roles_all_list(context,data_dict):
                 roles = {'System' : [],
                          'Group': [],
                          'Package': []} 
-                #user = model.User.get(user)
+         
                 for role in [u'admin',u'editor', u'reader']:      
                     if(authz.user_has_role(user, role, model.System())):
                         roles['System'].append(role)
