@@ -15,7 +15,7 @@ from ckan.lib.helpers import json
 from ckan import model
 
 from ckan.plugins import implements, SingletonPlugin
-from ckan.plugins import IAuthz
+import ckan.plugins as p
 
 
 log = getLogger(__name__)
@@ -23,7 +23,7 @@ log = getLogger(__name__)
 
 class Authz(SingletonPlugin):
 
-    implements(IAuthz, inherit=True)
+    implements(p.IAuthFunctions, inherit=True)
 
 
     def get_actions(self):
