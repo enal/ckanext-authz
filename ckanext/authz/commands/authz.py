@@ -98,20 +98,19 @@ class Authentication(CkanCommand):
         super(Authentication, self)._load_config()
         
     def list_roles(self):
-        try:
+        context = {
+            'model':model,
+            'session':model.Session,
+            'user': self.admin_user['name'],
+            'ignore_auth': True,
+        }
+        source = get_action('roles_list')(context,{'user_name':'pluginuser'})
         
-            context = {
-                'model':model,
-                'session':model.Session,
-                'user': self.admin_user['name'],
-                'ignore_auth': True,
-            }
-            source = get_action('roles_list')(context,{'user_name':'pluginuser'})
+        if(source['success'] == True):
             print str(source)
-            #self.print_harvest_source(source)
-            
-        except:
-            print 'An error occurred'
+        #self.print_harvest_source(source)
+        else:
+            print 'An error occurred: ' + source['msg']
 
     def print_roles(self,roles):
         for role in roles:

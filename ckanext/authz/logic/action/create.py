@@ -29,7 +29,8 @@ def admin_role_create(context,data_dict):
             model.Session.commit()
             return {'success': True}
         except:
-            return{'success' : False}
+            return{'success' : False,
+                   'error' : traceback.print_exc()} 
     else:
         return{'success' : False,
                    'msg' : 'authentication failed'}
