@@ -23,7 +23,7 @@ log = getLogger(__name__)
 
 class Authz(SingletonPlugin):
 
-    implements(p.IActions, inherit=True)
+    p.implements(p.IActions)
 
 
     def get_actions(self):
