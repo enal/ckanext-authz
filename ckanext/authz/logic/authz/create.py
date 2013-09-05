@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from ckan.plugins import toolkit as pt
 import ckan.model as model
-from ckanext.harvest.logic.auth import get_job_object
 
 
 def admin_role_create(context, data_dict):

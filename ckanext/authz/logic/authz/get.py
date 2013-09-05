@@ -2,9 +2,8 @@
 
 from ckan.plugins import toolkit as pt
 
-from ckanext.harvest.logic.auth import get_job_object
 
-def harvest_source_show(context, data_dict):
+def roles_list(context, data_dict):
     '''
     Authorization check for getting the details of the current roles
     
