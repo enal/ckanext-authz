@@ -70,7 +70,7 @@ def roles_all_list(context,data_dict):
         user_name = data_dict.get('user_name')
         log.info('Looking up roles for user %r ...', user_name)
         try:
-            roles = []
+            all_roles = []
             users = model.User.all()          
             for user in users:
                 user_roles = {'name' : user.name}
@@ -89,7 +89,7 @@ def roles_all_list(context,data_dict):
                                                 
                 user_roles['roles'] = roles
                 
-                roles.append(user_roles)
+                all_roles.append(user_roles)
 
             result = roles
             return {'success': True,
