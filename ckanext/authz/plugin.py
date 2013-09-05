@@ -7,16 +7,9 @@ from pylons.i18n import _
 from genshi.input import HTML
 from genshi.filters import Transformer
 
-import ckan.lib.helpers as h
-
-from ckan.lib.search import SearchError
-from ckan.lib.helpers import json
-
-from ckan import model
-
 from ckan.plugins import implements, SingletonPlugin
 import ckan.plugins as p
-import ckanext.authz.logic.action.create as a
+from ckanext.authz.logic.action.create import editor_role_create
 
 
 log = getLogger(__name__)
@@ -29,7 +22,7 @@ class Authz(SingletonPlugin):
 
     def get_actions(self):
 
-        return {'editor_role_create': a.editor_role_create}
+        return {'editor_role_create': editor_role_create}
         module_root = 'ckanext.authz.logic.action'
         action_functions = self._get_logic_functions(module_root)
         
