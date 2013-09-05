@@ -47,8 +47,7 @@ def editor_role_create(context,data_dict):
         model.Session.commit()
         return {'success': True}
     except:
-        traceback.print_exc()
-        return{'success' : False}
+        return{'success' : traceback.print_exc()}
     return None
 
 def reader_role_create(context,data_dict):
