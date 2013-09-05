@@ -91,7 +91,7 @@ def roles_all_list(context,data_dict):
                 
                 all_roles.append(user_roles)
 
-            result = roles
+            result = all_roles
             return {'success': True,
                     'result' : result}
         except:
