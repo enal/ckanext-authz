@@ -6,7 +6,6 @@ encoding//ckanext/authz/commands/authz.py=utf-8
 encoding//ckanext/authz/logic/__init__.py=utf-8
 encoding//ckanext/authz/logic/action/create.py=utf-8
 encoding//ckanext/authz/logic/action/get.py=utf-8
-encoding//ckanext/authz/logic/authz/__init__.py=utf-8
 encoding//ckanext/authz/logic/authz/create.py=utf-8
 encoding//ckanext/authz/logic/authz/get.py=utf-8
 encoding//ckanext/authz/plugin.py=utf-8

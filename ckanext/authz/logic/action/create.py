@@ -17,20 +17,24 @@ def admin_role_create(context,data_dict):
     
     :returns: on success True otherwise False
     :rtype: string
-    '''
+    '''   
+    success = check_access('admin_role_create',context,data_dict)
     
-    user_name = data_dict.get('user_name')
-    log.info('Creating admin role for user: %r', user_name)
-    try:
-        user = model.User.get(user_name)
-        authz.add_user_to_role(user,u'admin',model.System())
-        model.Session.commit()
-        return {'success': True}
-    except:
-        return{'success' : False}
+    if( success['success'] == True):
+    
+        user_name = data_dict.get('user_name')
+        log.info('Creating admin role for user: %r', user_name)
+        try:
+            user = model.User.get(user_name)
+            authz.add_user_to_role(user,u'admin',model.System())
+            model.Session.commit()
+            return {'success': True}
+        except:
+            return{'success' : False}
+    else:
+        return{'success' : False,
+                   'msg' : success['msg']}
         
-    return None
-
 
 def editor_role_create(context,data_dict):
     '''
@@ -41,7 +45,9 @@ def editor_role_create(context,data_dict):
     :returns: on success True otherwise False
     :rtype: string
     '''
-    if(check_access('editor_role_create',context,data_dict) == True):
+    success = check_access('editor_role_create',context,data_dict)
+    
+    if( success['success'] == True):
     
         user_name = data_dict.get('user_name')
         log.info('Creating editor role for user: %r', user_name)
@@ -52,11 +58,11 @@ def editor_role_create(context,data_dict):
             return {'success': True}
         except:
             return{'success' : False,
-                   'error' : traceback.print_exc()}
-        return None
+                   'msg' : traceback.print_exc()}
     else:
         return{'success' : False,
-                   'error' : 'not authorized'}
+                   'msg' : success['msg']}
+        
 
 def reader_role_create(context,data_dict):
     '''
@@ -67,17 +73,25 @@ def reader_role_create(context,data_dict):
     :returns: on success True otherwise False
     :rtype: string
     '''
-    user_name = data_dict.get('user_name')
-    log.info('Creating reader role for user: %r', user_name)
-    try:
-        user = model.User.get(user_name)
-        authz.add_user_to_role(user,u'reader',model.System())
-        model.Session.commit()
-        return {'success': True}
-    except:
+    success = check_access('reader_role_create',context,data_dict)
+    
+    if( success['success'] == True):
+    
+        user_name = data_dict.get('user_name')
+        log.info('Creating reader role for user: %r', user_name)
+        try:
+            user = model.User.get(user_name)
+            authz.add_user_to_role(user,u'reader',model.System())
+            model.Session.commit()
+            return {'success': True}
+        except:
+            return{'success' : False,
+                   'error' : traceback.print_exc()}    
+    else:
         return{'success' : False,
-               'error' : traceback.print_exc()}     
-    return None
+                   'msg' : success['msg']}
+         
+        
         
 def anon_editor_role_create(context,data_dict):
     '''
@@ -88,18 +102,24 @@ def anon_editor_role_create(context,data_dict):
     :returns: on success True otherwise False
     :rtype: string
     '''
-
+    success = check_access('reader_role_create',context,data_dict)
     
-    user_name = data_dict.get('user_name')
-    log.info('Creating reader role for user: %r', user_name)
-    try:
-        user = model.User.get(user_name)
-        authz.add_user_to_role(user,u'anon_editor',model.System())
-        model.Session.commit()
-        return {'success': True}
-    except:
+    if( success['success'] == True):
+    
+        user_name = data_dict.get('user_name')
+        log.info('Creating reader role for user: %r', user_name)
+        try:
+            user = model.User.get(user_name)
+            authz.add_user_to_role(user,u'anon_editor',model.System())
+            model.Session.commit()
+            return {'success': True}
+        except:
+            return{'success' : False,
+                   'error' : traceback.print_exc()}    
+    else:
         return{'success' : False,
-               'error' : traceback.print_exc()}       
-    return None
+                   'msg' : success['msg']}
+            
+
 
 
