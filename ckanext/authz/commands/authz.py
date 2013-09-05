@@ -7,7 +7,7 @@ from ckan.logic import get_action, ValidationError
 
 from ckan.lib.cli import CkanCommand
 
-class Authzentification(CkanCommand):
+class Authentication(CkanCommand):
     '''Changes remotely authentication configurations
 
     Usage:
