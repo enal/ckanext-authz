@@ -16,14 +16,14 @@ import ckan.model as model
 
 log = logging.getLogger(__name__)
 
-def roles_list(context,data_dict):
+def roles_user_list(context,data_dict):
     '''
-    Returns the any current roles
+    Returns the roles of the given user
     
     :returns: roles
     :rtype: dictionary
     '''      
-    if( check_access('roles_list',context,data_dict) == True):
+    if( check_access('roles_user_list',context,data_dict) == True):
     
         user_name = data_dict.get('user_name')
         log.info('Looking up roles for user %r ...', user_name)

@@ -29,15 +29,17 @@ class Authentication(CkanCommand):
         - Removes admin rights from the given user.
         
       authz rm-editor {name}
-        - Removes editor rights from the given user. This means the user can edit, read and create new objects.
+        - Removes editor rights from the given user. 
         
       authz rm-reader {name}
-        - Removes reader rights from the given user. This means the user can perform any action on any object.
+        - Removes reader rights from the given user. 
         
       authz rm-anon_editor {name}
-        - Removes editor rights from anonymous (i.e. not logged in) users. This means the user can edit and read any object
+        - Removes editor rights from anonymous (i.e. not logged in) users.
     
     
+    authz roles-user {name}
+        - Displays current roles of the given user.   
       authz roles
         - Displays any current roles.
 
@@ -74,7 +76,9 @@ class Authentication(CkanCommand):
             sys.exit(1)
         cmd = self.args[0]
         if cmd == 'roles':
-            self.list_roles()
+            self.list_all_roles()
+        if cmd == 'roles-user':
+            self.list_user_roles()
         elif cmd == "add-admin":
             self.add_admin()
         elif cmd == 'add-editor':
@@ -97,14 +101,14 @@ class Authentication(CkanCommand):
     def _load_config(self):
         super(Authentication, self)._load_config()
         
-    def list_roles(self):
+    def list_user_roles(self):
         context = {
             'model':model,
             'session':model.Session,
             'user': self.admin_user['name'],
             'ignore_auth': True,
         }
-        source = get_action('roles_list')(context,{'user_name':'pluginuser'})
+        source = get_action('roles_user_list')(context,{'user_name':'pluginuser'})
         
         if(source['success'] == True):
             roles = source['result']
@@ -113,10 +117,13 @@ class Authentication(CkanCommand):
             print 'An error occurred: ' + str(source['msg'])
 
 
+    def list__all_roles(self):
+        print 'to be implemented'
+
     def print_roles(self,roles):
-            print 'System: %s' % roles['System'] + '\n'
-            print 'Group: %s' % roles['Group'] + '\n'
-            print 'Package: %s' % roles['Package'] + '\n'
+            print 'System: %s' % roles['System'] 
+            print 'Group: %s' % roles['Group'] 
+            print 'Package: %s' % roles['Package']
 
 
     def add_admin(self):
