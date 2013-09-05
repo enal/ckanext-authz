@@ -76,7 +76,7 @@ def roles_all_list(context,data_dict):
             
             users = model.User.all()          
             for user in users:
-                user_roles = {'name' : user.name}
+                user_roles = {'name' : str(user.name)}
                 
                 roles = {'System' : [],
                          'Group': [],
