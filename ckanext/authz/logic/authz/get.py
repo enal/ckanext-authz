@@ -12,3 +12,14 @@ def roles_user_list(context, data_dict):
         return {'success': False, 'msg': pt._('Only sysadmins can view current roles')}
     else:
         return {'success': True}
+    
+    
+    
+def roles_all_list(context, data_dict):
+    '''
+    Authorization check for getting the details of any current user roles    
+    '''
+    if not user_is_sysadmin(context):
+        return {'success': False, 'msg': pt._('Only sysadmins can view current roles')}
+    else:
+        return {'success': True}

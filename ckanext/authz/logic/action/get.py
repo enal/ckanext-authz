@@ -32,36 +32,15 @@ def roles_user_list(context,data_dict):
             
             roles = {'System' : [],
                      'Group': [],
-                     'Package': [],
-                     'User': []}
-            
-            users = model.User.all()
-            
-            for user in users:
-                roles['User'].append(user.name) 
-            
-            if(authz.user_has_role(user, u'admin', model.System())):
-                roles['System'].append('admin')
-            if(authz.user_has_role(user, u'admin', model.Package())): 
-                roles['Group'].append('admin')
-            if(authz.user_has_role(user, u'admin', model.Group())): 
-                roles['Package'].append('admin')
+                     'Package': []}         
                 
-                
-            if(authz.user_has_role(user, u'editor', model.System())):
-                roles['System'].append('editor')
-            if(authz.user_has_role(user, u'editor', model.Package())): 
-                roles['Package'].append('editor')
-            if(authz.user_has_role(user, u'editor', model.Group())): 
-                roles['Group'].append('editor')
-                           
-                
-            if(authz.user_has_role(user, u'reader', model.System())):
-                roles['System'].append('reader')
-            if(authz.user_has_role(user, u'reader', model.Package())): 
-                roles['Package'].append('reader')
-            if(authz.user_has_role(user, u'reader', model.Group())): 
-                roles['Group'].append('reader')
+            for role in [u'admin',u'editor', u'reader']:      
+                if(authz.user_has_role(user_name, role, model.System())):
+                    roles['System'].append(role)
+                if(authz.user_has_role(user_name, role, model.Package())): 
+                    roles['Package'].append(role)
+                if(authz.user_has_role(user_name, role, model.Group())): 
+                    roles['Group'].append(role)
                 
             
             result = roles
@@ -73,6 +52,56 @@ def roles_user_list(context,data_dict):
     else:
         return{'success' : False,
                    'msg' : 'authentication failed'}
+        
+
+
+
+        
+        
+def roles_all_list(context,data_dict):
+    '''
+    Returns the roles of the given user
     
+    :returns: roles
+    :rtype: dictionary
+    '''      
+    if( check_access('roles_user_list',context,data_dict) == True):
+    
+        user_name = data_dict.get('user_name')
+        log.info('Looking up roles for user %r ...', user_name)
+        try:
+            user = model.User.get(user_name)
+            
+            roles = []
+            
+            users = model.User.all()          
+            for user in users:
+                user_roles = {'name' : user.name}
+                
+                roles = {'System' : [],
+                         'Group': [],
+                         'Package': []} 
+                
+                for role in [u'admin',u'editor', u'reader']:      
+                    if(authz.user_has_role(user.name, role, model.System())):
+                        roles['System'].append(role)
+                    if(authz.user_has_role(user.name, role, model.Package())): 
+                        roles['Package'].append(role)
+                    if(authz.user_has_role(user.name, role, model.Group())): 
+                        roles['Group'].append(role)
+                                                
+                user_roles['roles'] = roles
+                
+                roles.append(user_roles)
+
+            result = roles
+            return {'success': True,
+                    'result' : result}
+        except:
+            return{'success' : False,
+                   'msg' : traceback.print_exc()} 
+    else:
+        return{'success' : False,
+                   'msg' : 'authentication failed'}
 
 

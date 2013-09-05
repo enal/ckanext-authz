@@ -124,13 +124,29 @@ class Authentication(CkanCommand):
 
 
     def list_all_roles(self):
-        print 'to be implemented'
+        context = {
+            'model':model,
+            'session':model.Session,
+            'user': self.admin_user['name'],
+            'ignore_auth': True,
+        }
+        source = get_action('roles_all_list')(context,{})
+        
+        if(source['success'] == True):
+            user_roles = source['result']
+            for user_role in user_roles:
+                print 'User: %s' % user_role['name']
+                self.print_roles(user_role['roles'])
+            print '\n'
+        else:
+            print 'An error occurred: ' + str(source['msg'])
+        
 
     def print_roles(self,roles):
             print 'System: %s' % roles['System'] 
             print 'Group: %s' % roles['Group'] 
             print 'Package: %s' % roles['Package']
-            print 'User: %s' % roles['User']
+            
 
 
     def add_admin(self):
