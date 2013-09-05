@@ -18,9 +18,8 @@ def admin_role_create(context,data_dict):
     :returns: on success True otherwise False
     :rtype: string
     '''   
-    success = check_access('admin_role_create',context,data_dict)
-    
-    if( success['success'] == True):
+        
+    if( check_access('admin_role_create',context,data_dict) == True):
     
         user_name = data_dict.get('user_name')
         log.info('Creating admin role for user: %r', user_name)
@@ -33,7 +32,7 @@ def admin_role_create(context,data_dict):
             return{'success' : False}
     else:
         return{'success' : False,
-                   'msg' : success['msg']}
+                   'msg' : 'authentication failed'}
         
 
 def editor_role_create(context,data_dict):
@@ -45,9 +44,7 @@ def editor_role_create(context,data_dict):
     :returns: on success True otherwise False
     :rtype: string
     '''
-    success = check_access('editor_role_create',context,data_dict)
-    
-    if( success['success'] == True):
+    if( check_access('admin_role_create',context,data_dict) == True):
     
         user_name = data_dict.get('user_name')
         log.info('Creating editor role for user: %r', user_name)
@@ -61,7 +58,7 @@ def editor_role_create(context,data_dict):
                    'msg' : traceback.print_exc()}
     else:
         return{'success' : False,
-                   'msg' : success['msg']}
+                   'msg' : 'authentication failed'}
         
 
 def reader_role_create(context,data_dict):
@@ -73,9 +70,7 @@ def reader_role_create(context,data_dict):
     :returns: on success True otherwise False
     :rtype: string
     '''
-    success = check_access('reader_role_create',context,data_dict)
-    
-    if( success['success'] == True):
+    if( check_access('admin_role_create',context,data_dict) == True):
     
         user_name = data_dict.get('user_name')
         log.info('Creating reader role for user: %r', user_name)
@@ -89,7 +84,7 @@ def reader_role_create(context,data_dict):
                    'error' : traceback.print_exc()}    
     else:
         return{'success' : False,
-                   'msg' : success['msg']}
+                   'msg' : 'authentication failed'}
          
         
         
@@ -102,9 +97,7 @@ def anon_editor_role_create(context,data_dict):
     :returns: on success True otherwise False
     :rtype: string
     '''
-    success = check_access('reader_role_create',context,data_dict)
-    
-    if( success['success'] == True):
+    if( check_access('admin_role_create',context,data_dict) == True):
     
         user_name = data_dict.get('user_name')
         log.info('Creating reader role for user: %r', user_name)
@@ -118,7 +111,7 @@ def anon_editor_role_create(context,data_dict):
                    'error' : traceback.print_exc()}    
     else:
         return{'success' : False,
-                   'msg' : success['msg']}
+                   'msg' : 'authentication failed'}
             
 
 
