@@ -55,7 +55,8 @@ def editor_role_create(context,data_dict):
                    'error' : traceback.print_exc()}
         return None
     else:
-        print 'not authorized'
+        return{'success' : False,
+                   'error' : 'not authorized'}
 
 def reader_role_create(context,data_dict):
     '''
