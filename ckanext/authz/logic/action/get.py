@@ -42,7 +42,7 @@ def roles_list(context,data_dict):
                     'result' : result}
         except:
             return{'success' : False,
-                   'error' : traceback.print_exc()} 
+                   'msg' : traceback.print_exc()} 
     else:
         return{'success' : False,
                    'msg' : 'authentication failed'}
