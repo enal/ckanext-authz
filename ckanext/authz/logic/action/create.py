@@ -45,7 +45,7 @@ def editor_role_create(context,data_dict):
     :returns: on success True otherwise False
     :rtype: string
     '''
-    if( check_access('admin_role_create',context,data_dict) == True):
+    if( check_access('editor_role_create',context,data_dict) == True):
     
         user_name = data_dict.get('user_name')
         log.info('Creating editor role for user: %r', user_name)
@@ -72,7 +72,7 @@ def reader_role_create(context,data_dict):
     :returns: on success True otherwise False
     :rtype: string
     '''
-    if( check_access('admin_role_create',context,data_dict) == True):
+    if( check_access('reader_role_create',context,data_dict) == True):
     
         user_name = data_dict.get('user_name')
         log.info('Creating reader role for user: %r', user_name)
@@ -99,7 +99,7 @@ def anon_editor_role_create(context,data_dict):
     :returns: on success True otherwise False
     :rtype: string
     '''
-    if( check_access('admin_role_create',context,data_dict) == True):
+    if( check_access('anon_editor_role_create',context,data_dict) == True):
     
         user_name = data_dict.get('user_name')
         log.info('Creating reader role for user: %r', user_name)

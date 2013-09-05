@@ -102,13 +102,19 @@ class Authentication(CkanCommand):
         super(Authentication, self)._load_config()
         
     def list_user_roles(self):
+        if len(self.args) >= 2:
+            user_name = unicode(self.args[1])
+        else:
+            print 'Please provide a name'
+            sys.exit(1)
+        
         context = {
             'model':model,
             'session':model.Session,
             'user': self.admin_user['name'],
             'ignore_auth': True,
         }
-        source = get_action('roles_user_list')(context,{'user_name':'pluginuser'})
+        source = get_action('roles_user_list')(context,{'user_name':user_name})
         
         if(source['success'] == True):
             roles = source['result']
@@ -139,7 +145,7 @@ class Authentication(CkanCommand):
         if result['success'] == True:
             print 'role admin is successfully created for user %s' % user_name
         else:
-            print 'An error occurred: %s' % result['msg']
+            print 'An error occurred: ' + str(result['msg'])
     
     def add_editor(self):
         if len(self.args) >= 2:
@@ -154,7 +160,7 @@ class Authentication(CkanCommand):
         if result['success'] == True:
             print 'role editor is successfully created for user %s' % user_name
         else:
-            print 'An error occurred: %s' % result['msg']
+            print 'An error occurred: ' +  str(result['msg'])
 
      
     def add_reader(self):
@@ -170,7 +176,7 @@ class Authentication(CkanCommand):
         if result['success'] == True:
             print 'role reader is successfully created for user %s' % user_name
         else:
-            print 'An error occurred: %s' % result['msg']
+            print 'An error occurred: ' +  str(result['msg'])
             
             
     def add_anony_editor(self):
@@ -186,7 +192,7 @@ class Authentication(CkanCommand):
         if result['success'] == True:
             print 'role anon_editor is successfully created for user %s' % user_name
         else:
-            print 'An error occurred: %s' % result['msg']
+            print 'An error occurred: ' + str(result['msg'])
 
 
     def remove_admin(self):
@@ -202,7 +208,7 @@ class Authentication(CkanCommand):
         if result['success'] == True:
             print 'role admin is successfully deleted for user %s' % user_name
         else:
-            print 'An error occurred: %s' % result['msg']
+            print 'An error occurred: ' + str(result['msg'])
     
     def remove_editor(self):
         if len(self.args) >= 2:
@@ -217,7 +223,7 @@ class Authentication(CkanCommand):
         if result['success'] == True:
             print 'role editor is successfully deleted for user %s' % user_name
         else:
-            print 'An error occurred: %s' % result['msg']
+            print 'An error occurred: ' + str(result['msg'])
 
      
     def remove_reader(self):
@@ -233,7 +239,7 @@ class Authentication(CkanCommand):
         if result['success'] == True:
             print 'role reader is successfully deleted for user %s' % user_name
         else:
-            print 'An error occurred: %s' % result['msg']
+            print 'An error occurred: ' + str(result['msg'])
             
             
     def remove_anony_editor(self):
@@ -249,7 +255,7 @@ class Authentication(CkanCommand):
         if result['success'] == True:
             print 'role anon_editor is successfully deleted for user %s' % user_name
         else:
-            print 'An error occurred: %s' % result['msg']
+            print 'An error occurred: ' + str(result['msg'])
 
 
     
