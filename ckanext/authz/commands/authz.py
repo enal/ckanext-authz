@@ -40,7 +40,7 @@ class Authentication(CkanCommand):
 
     def __init__(self,name):
 
-        super(Authzentification,self).__init__(name)
+        super(Authentication,self).__init__(name)
 
 
     def command(self):
@@ -72,7 +72,7 @@ class Authentication(CkanCommand):
             print 'Command %s not recognized' % cmd
 
     def _load_config(self):
-        super(Authzentification, self)._load_config()
+        super(Authentication, self)._load_config()
         
     def list_roles(self):
         try:
