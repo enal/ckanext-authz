@@ -30,11 +30,14 @@ def roles_list(context,data_dict):
         try:
             user = model.User.get(user_name)
             
-            admin_s = authz._user_query(user, u'admin', model.System())
-            admin_p = authz._user_query(user, u'admin', model.Package())
-            admin_g = authz._user_query(user, u'admin', model.Group())
+            objectrole = authz.UserObjectRole.get_object_role_class(model.System())
+            admin_s = objectrole._user_query(user, u'admin', model.System())
             
-            result = admin_s +admin_p + admin_g
+            #admin_s = authz._user_query(user, u'admin', model.System())
+            #admin_p = authz._user_query(user, u'admin', model.Package())
+            #admin_g = authz._user_query(user, u'admin', model.Group())
+            
+            result = admin_s #+admin_p + admin_g
             
             #authz.add_user_to_role(user,u'admin',model.System())
             #model.Session.commit()
