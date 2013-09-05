@@ -33,6 +33,8 @@ def roles_list(context,data_dict):
             objectrole = authz.UserObjectRole.get_object_role_class(model.System())
             admin_s = objectrole._user_query(user, u'admin', model.System())
             
+            
+            
             #admin_s = authz._user_query(user, u'admin', model.System())
             #admin_p = authz._user_query(user, u'admin', model.Package())
             #admin_g = authz._user_query(user, u'admin', model.Group())
