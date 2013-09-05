@@ -70,10 +70,7 @@ def roles_all_list(context,data_dict):
         user_name = data_dict.get('user_name')
         log.info('Looking up roles for user %r ...', user_name)
         try:
-            user = model.User.get(user_name)
-            
             roles = []
-            
             users = model.User.all()          
             for user in users:
                 user_roles = {'name' : user.name}
