@@ -5,6 +5,7 @@ from ckan import logic
 import ckan.model as model
 import ckan.model.authz as authz
 import traceback
+from ckan.logic import NotFound, check_access
 
 log = logging.getLogger(__name__)
 
@@ -40,7 +41,8 @@ def editor_role_create(context,data_dict):
     :returns: on success True otherwise False
     :rtype: string
     '''
-
+    check_access('editor_role_create',context,data_dict)
+    
     user_name = data_dict.get('user_name')
     log.info('Creating editor role for user: %r', user_name)
     try:
@@ -83,6 +85,7 @@ def anon_editor_role_create(context,data_dict):
     :returns: on success True otherwise False
     :rtype: string
     '''
+
     
     user_name = data_dict.get('user_name')
     log.info('Creating reader role for user: %r', user_name)
