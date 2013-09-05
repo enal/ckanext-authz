@@ -35,6 +35,7 @@ class Authentication(CkanCommand):
 
     '''
 
+    summary = __doc__.split('\n')[0]
     max_args = 1
     min_args = 0
 
